@@ -1,7 +1,5 @@
 package org.kkp.core.xss;
 
-import org.kkp.core.util.XssUtil;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 

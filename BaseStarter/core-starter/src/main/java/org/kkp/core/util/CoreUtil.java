@@ -7,6 +7,7 @@ import org.kkp.core.CoreProperties;
 import org.kkp.core.exception.SystemRuntimeException;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -86,5 +87,14 @@ public class CoreUtil {
             log.debug("set traceId failed");
         }
         return traceId;
+    }
+
+    public static HttpServletRequest getHttpServletRequest() {
+        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+        if (requestAttributes != null) {
+            ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) requestAttributes;
+            return servletRequestAttributes.getRequest();
+        }
+        return null;
     }
 }

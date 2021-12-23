@@ -1,4 +1,4 @@
-package org.kkp.core.util;
+package org.kkp.core.xss;
 
 import java.util.regex.Pattern;
 
