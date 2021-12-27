@@ -12,10 +12,10 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.UnknownHostException;
+import java.util.*;
 
 /**
  * @author Klaus
@@ -96,5 +96,53 @@ public class CoreUtil {
             return servletRequestAttributes.getRequest();
         }
         return null;
+    }
+
+    /**
+     * 获得局域网IP地址
+     *
+     * @return InetAddress
+     * @throws UnknownHostException
+     */
+    public static InetAddress getLocalHostLANAddress() throws UnknownHostException {
+        //排除docker
+        final String excludeDocker = "docker";
+        //处理
+        try {
+            InetAddress candidateAddress = null;
+            // 遍历所有的网络接口
+            for (Enumeration ifaces = NetworkInterface.getNetworkInterfaces(); ifaces.hasMoreElements(); ) {
+                NetworkInterface iface = (NetworkInterface) ifaces.nextElement();
+                //排除docker
+                if (!iface.getName().contains(excludeDocker)) {
+                    // 在所有的接口下再遍历IP
+                    for (Enumeration inetAddrs = iface.getInetAddresses(); inetAddrs.hasMoreElements(); ) {
+                        InetAddress inetAddr = (InetAddress) inetAddrs.nextElement();
+                        if (!inetAddr.isLoopbackAddress()) {// 排除loopback类型地址
+                            if (inetAddr.isSiteLocalAddress()) {
+                                // 如果是site-local地址，就是它了
+                                return inetAddr;
+                            } else if (candidateAddress == null) {
+                                // site-local类型的地址未被发现，先记录候选地址
+                                candidateAddress = inetAddr;
+                            }
+                        }
+                    }
+                }
+            }
+            if (candidateAddress != null) {
+                return candidateAddress;
+            }
+            // 如果没有发现 non-loopback地址.只能用最次选的方案
+            InetAddress jdkSuppliedAddress = InetAddress.getLocalHost();
+            if (jdkSuppliedAddress == null) {
+                throw new UnknownHostException("The JDK InetAddress.getLocalHost() method unexpectedly returned null.");
+            }
+            return jdkSuppliedAddress;
+        } catch (Exception e) {
+            UnknownHostException unknownHostException = new UnknownHostException("Failed to determine LAN address: " + e);
+            unknownHostException.initCause(e);
+            throw unknownHostException;
+        }
     }
 }

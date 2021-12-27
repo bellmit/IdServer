@@ -48,6 +48,17 @@ public class FileLockWrapper implements Closeable {
     }
 
     /**
+     * 构造函数
+     *
+     * @param name 锁文件名称
+     * @param wait 是否等待
+     */
+    public FileLockWrapper(String name, boolean wait) {
+        this.initFileLock(name, wait);
+    }
+
+
+    /**
      * 初始化
      *
      * @param name 锁名字
@@ -147,7 +158,12 @@ public class FileLockWrapper implements Closeable {
         }
     }
 
-    private boolean isValid() {
+    /**
+     * 锁状态
+     *
+     * @return boolean
+     */
+    public boolean isValid() {
         return this.lock != null && this.lock.isValid();
     }
 
