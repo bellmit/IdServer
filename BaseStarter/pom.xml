@@ -13,6 +13,7 @@
         <module>cache-db-stater</module>
         <module>dinamic-datasource-starter</module>
         <module>file-db-starter</module>
+        <module>queue-db-stater</module>
     </modules>
     <properties>
         <spring.version>2.4.3</spring.version>

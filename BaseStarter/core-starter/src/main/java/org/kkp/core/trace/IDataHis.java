@@ -1,19 +1,16 @@
 package org.kkp.core.trace;
 
 /**
- * @author Klaus
- * @since 2021/12/21
- **/
+ * 数据历史
+ */
 public interface IDataHis {
-
     /**
      * 保存
      *
-     * @param traceId
-     * @param name
-     * @param pk
-     * @param content
-     * @param userId
+     * @param traceId traceId
+     * @param name    name
+     * @param pk      pk
+     * @param content content
      */
     void save(String traceId, String name, String pk, Object content, String userId);
 }
