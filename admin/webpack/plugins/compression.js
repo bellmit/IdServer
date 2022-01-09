@@ -1,26 +1,15 @@
-import compression from 'vite-plugin-compression'
+const CompressionPlugin = require('compression-webpack-plugin')
 
-export default function createCompression(env) {
+module.exports = (env) => {
     const { VITE_BUILD_COMPRESS } = env
     const compressList = VITE_BUILD_COMPRESS.split(',')
-    const plugin = []
+    var config = {}
     if (compressList.includes('gzip')) {
         // http://doc.ruoyi.vip/ruoyi-vue/other/faq.html#使用gzip解压缩静态文件
-        plugin.push(
-            compression({
-                ext: '.gz',
-                deleteOriginFile: false
-            })
-        )
+        config.algorithm = 'gzip'
     }
     if (compressList.includes('brotli')) {
-        plugin.push(
-            compression({
-                ext: '.br',
-                algorithm: 'brotliCompress',
-                deleteOriginFile: false
-            })
-        )
+        config.algorithm = 'gzip'
     }
-    return plugin
+    return new CompressionPlugin(config)
 }

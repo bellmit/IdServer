@@ -1,6 +1,6 @@
-import autoImport from 'unplugin-auto-import/webpack'
+const autoImport = require('unplugin-auto-import/webpack')
 
-export default function createAutoImport() {
+module.exports = () => {
     return autoImport({
         imports: [
             'vue',

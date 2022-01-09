@@ -1,5 +1,5 @@
-import setupExtend from 'vite-plugin-vue-setup-extend'
+const setupExtend = require('vite-plugin-vue-setup-extend')
 
-export default function createSetupExtend() {
+module.exports = () => {
     return setupExtend()
 }
