@@ -26,5 +26,5 @@ module.exports = {
             // }
         }
     },
-
+    lintOnSave: 'warning'
 }
