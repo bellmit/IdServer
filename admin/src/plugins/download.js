@@ -5,7 +5,7 @@ import { getToken } from '@/utils/auth'
 import errorCode from '@/utils/errorCode'
 import { blobValidate } from '@/utils/ruoyi'
 
-const baseURL = process.env.VITE_APP_BASE_API
+const baseURL = import.meta.env.VITE_APP_BASE_API
 
 export default {
   name(name, isDelete = true) {
@@ -43,7 +43,7 @@ export default {
     })
   },
   zip(url, name) {
-    url = baseURL + url
+    var url = baseURL + url
     axios({
       method: 'get',
       url: url,

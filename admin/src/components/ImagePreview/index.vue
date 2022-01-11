@@ -36,7 +36,7 @@ const realSrc = computed(() => {
   if (isExternal(real_src)) {
     return real_src;
   }
-  return process.env.VITE_APP_BASE_API + real_src;
+  return import.meta.env.VITE_APP_BASE_API + real_src;
 });
 
 const realSrcList = computed(() => {
@@ -46,7 +46,7 @@ const realSrcList = computed(() => {
     if (isExternal(item)) {
       return srcList.push(item);
     }
-    return srcList.push(process.env.VITE_APP_BASE_API + item);
+    return srcList.push(import.meta.env.VITE_APP_BASE_API + item);
   });
   return srcList;
 });
