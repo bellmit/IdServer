@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: auth-api
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yml
+  datasource:
+    username: klaus
+    password: 123456
+    driver-class-name: com.alibaba.druid.proxy.DruidDriver
+    url: jdbc:mysql://127.0.0.1:3306
+org:
+  kkp:
+    starter:
+      core:
+        properties:
+          contentCaching: false
+          corsPathPattern: /**
+          corsAllowedOrigins: true
+          xssFilterPathPattern: /*
+          traceFilterPathPattern: /*
+          outputExceptionStackTrace: true
+          httpConnectTimeout: 5000
+          httpReadTimeout: 5000
+          bufferRequestBody: true
+          timeZone: Asia/Shanghai
+          dateFormat: yyyy-MM-dd'T'HH:mm:ss:SSSZ
+          traceAlert: true
+          GuavaCacheProperties:
+            concurrencyLevel: 10
