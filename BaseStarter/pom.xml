@@ -14,6 +14,7 @@
         <module>dinamic-datasource-starter</module>
         <module>file-db-starter</module>
         <module>queue-db-stater</module>
+        <module>web-starter</module>
     </modules>
     <properties>
         <spring.version>2.0.0.RELEASE</spring.version>
@@ -46,6 +47,11 @@
             <dependency>
                 <groupId>org.kkp</groupId>
                 <artifactId>core-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.kkp</groupId>
+                <artifactId>web-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!--  确定spring cloud 版本          -->
