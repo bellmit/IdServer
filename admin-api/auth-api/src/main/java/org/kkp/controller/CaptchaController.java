@@ -27,7 +27,7 @@ public class CaptchaController {
      *
      * @return
      */
-    @GetMapping("/")
+    @GetMapping("/captchaImage")
     public RestResponse<String> image() {
         // todo 验证码开关， 验证码开关如果是关了就直接没有验证码了
 

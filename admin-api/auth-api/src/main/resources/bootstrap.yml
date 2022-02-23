@@ -7,10 +7,16 @@ spring:
         server-addr: 127.0.0.1:8848
         file-extension: yml
   datasource:
-    username: klaus
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/ry-vue?useSSL=false&useUnicode=true&allowPublicKeyRetrieval=true
+    username: root
     password: 123456
-    driver-class-name: com.alibaba.druid.proxy.DruidDriver
-    url: jdbc:mysql://127.0.0.1:3306
+    druid:
+      validation-query: select 1
+      test-while-idle: true
+      time-between-eviction-runs-millis: 300000
+
 org:
   kkp:
     starter:
@@ -30,3 +36,4 @@ org:
           traceAlert: true
           GuavaCacheProperties:
             concurrencyLevel: 10
+

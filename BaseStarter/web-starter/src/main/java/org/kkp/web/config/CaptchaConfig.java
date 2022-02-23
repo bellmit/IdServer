@@ -15,7 +15,7 @@ import static com.google.code.kaptcha.Constants.*;
  * @since 2022/1/13
  **/
 @Configuration
-@ConditionalOnMissingBean
+@ConditionalOnMissingBean(type = "CaptchaConfig.class")
 public class CaptchaConfig {
 
     @Bean(name = "captchaProducer")
